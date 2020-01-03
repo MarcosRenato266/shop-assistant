@@ -74,7 +74,7 @@ const start = options => {
     app.get('/updateList', (req, res) => {
       //const { password } = req.body;
       // password === "q1w2e3r41515@" ? updateLists() : res.send('you have no permission for that');
-      res.send('Atualizando...');
+      res.send('Atualizando Lista de itens, Esse processo pode levar algum tempo.');
       updateLists();
       res.end();
     });

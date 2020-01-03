@@ -1,0 +1,25 @@
+type Item {
+  id: ID!
+  internalId: String
+  name: String
+  category: String
+  tier: String
+  itemImage: String
+}
+
+input RegisterItemInput {
+  internalId: String!
+  name: String!
+  category: String
+  tier: String!
+  itemImage: String
+}
+
+type Query {
+  itemById(itemId: String!): Item,
+  itemByInternalId(itemInternalId: String!): Item
+}
+
+type Mutation {
+  registerItem(input: RegisterItemInput!): Item
+}

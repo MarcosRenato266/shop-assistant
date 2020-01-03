@@ -1,0 +1,20 @@
+type Build {
+  id: ID!
+  relatedItem: Item
+  rarity: String
+  perfectRune: Item
+  perfectSpirity: Item
+}
+
+input RegisterBuildInput {
+  rarity: String!
+}
+
+type Query {
+  buildById(buildId: String!): Build,
+  buildItemByInternalId(buildItemInternalId: String!): Build
+}
+
+type Mutation {
+  registerBuild(input: RegisterBuildInput!): Build
+}

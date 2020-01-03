@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+import models from '../models';
 
 function wait(ms) {
   var start = new Date().getTime();
@@ -36,15 +37,41 @@ export function getItens() {
         const resultItem = {
           internalId: node.querySelector('h2').textContent.replace(/ /g, '_'),
           name: node.querySelector('h2').textContent,
-          category: node.querySelector('.Title--Image').style.background,
+          category: node
+            .querySelector('.Title--Image')
+            .style.background.split('("')[1]
+            .split('")')[0],
           tier: node.querySelector('.Tier--Value').textContent,
-          itemImage: node.querySelector('.ItemImage').style.backgroundImage,
+          itemImage: node
+            .querySelector('.ItemImage')
+            .style.backgroundImage.split('("')[1]
+            .split('")')[0],
         };
         return resultItem;
       });
     });
-    
-    console.log(allItens);
+
     await browser.close();
+
+    //Save all Itens
+    allItens.map(itemElement => {
+      models.sequelize
+        .transaction(async transaction => {
+          const itemModel = await models.Item.build({
+            internalId: itemElement.internalId,
+            name: itemElement.name,
+            category: itemElement.category,
+            tier: itemElement.tier,
+            itemImage: itemElement.itemImage,
+          });
+          const item = await itemModel.save({ transaction });
+
+          return item;
+        })
+        .catch(err => {
+          err.code === '23505' && console.log('this item already exists.');
+        });
+
+    });
   })();
 }
