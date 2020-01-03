@@ -1,0 +1,13 @@
+#!/bin/bash
+echo 'post-receive: Triggered.'
+cd /opt/live/fiduc-server
+echo 'post-receive: git check out…'
+git --git-dir=/opt/fiduc-server.git --work-tree=/opt/live/fiduc-server checkout master -f
+echo 'post-receive: npm install…'
+yarn install \
+&& echo 'post-receive: building…' \
+&& yarn build \
+&& echo 'post-receive: → done.' \
+&& (~/.npm-global/bin/pm2 delete 'fiduc-server-by-githook' || true) \
+&& ~/.npm-global/bin/pm2 start npm --name 'fiduc-server-by-githook' -- start \
+&& echo 'post-receive: app started successfully with pm2.'
