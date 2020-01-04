@@ -9,9 +9,12 @@ import {
   itemTransactionError,
 } from '../../errors';
 
-const itemById = isAuthenticatedResolver.createResolver(
+const itemById = baseResolver.createResolver(
   async (root, { itemId }) => {
-    return await models.Item.findById(itemId);
+
+    return await await models.Item.findOne({
+      where: { id: itemId },
+    });
   }
 );
 

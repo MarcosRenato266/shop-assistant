@@ -38,5 +38,20 @@ export default (sequelize, DataTypes) => {
   //   });
   // };
 
+  Item.associate = models => {
+    models.Item.hasOne(models.Build, {
+      as: 'RelatedItem',
+      foreignKey: { name: 'relatedItemId' },
+    });
+    models.Item.hasOne(models.Build, {
+      as: 'PerfectRune',
+      foreignKey: { name: 'perfectRuneId' },
+    });
+    models.Item.hasOne(models.Build, {
+      as: 'PerfectSpirity',
+      foreignKey: { name: 'perfectSpirityId' },
+    });
+  };
+
   return Item;
 };

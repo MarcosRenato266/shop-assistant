@@ -9,9 +9,11 @@ import {
   buildTransactionError,
 } from '../../errors';
 
-const buildById = isAuthenticatedResolver.createResolver(
+const buildById = baseResolver.createResolver(
   async (root, { buildId }) => {
-    return await models.Build.findById(buildId);
+    return await models.Build.findOne({
+      where: { id: buildId },
+    });
   }
 );
 
@@ -23,35 +25,46 @@ const buildItemByInternalId = isAuthenticatedResolver.createResolver(
 
 // Mutation type
 const registerBuild = baseResolver.createResolver(async (root, { input }) => {
-  const { itemByInternalId,
+  const { relatedItemId,
     rarity,
-    perfectRune,
-    perfectSpirity } = input;
+    perfectRuneId,
+    perfectSpirityId } = input;
 
-  if (!itemByInternalId ||
+  if (!relatedItemId ||
     !rarity ||
-    !perfectRune ||
-    !perfectSpirity) return new buildMissingFields();
+    !perfectRuneId ||
+    !perfectSpirityId) return new buildMissingFields();
 
-  const existentBuild = await models.Item.findOne({
-    where: { itemByInternalId: itemByInternalId, rarity: rarity },
+  const existentBuild = await models.Build.findOne({
+    where: { relatedItemId: relatedItemId, rarity: rarity },
   });
 
   if (existentBuild) return new buildAlreadyExists();
 
+  const relatedItem = await models.Item.findOne({
+    where: { id: relatedItemId },
+  });
+  const perfectRune = await models.Item.findOne({
+    where: { id: perfectRuneId },
+  });
+  const perfectSpirity = await models.Item.findOne({
+    where: { id: perfectSpirityId },
+  });
+
   return models.sequelize
     .transaction(async transaction => {
-      const buildModel = await models.Build.build({
-        itemByInternalId,
-        rarity,
-        perfectRune,
-        perfectSpirity
-      });
-      const build = await buildModel.save({ transaction });
+      const buildModel = await models.Build.create({
+        rarity
+      }, { transaction });
 
-      return build;
+      await relatedItem.setRelatedItem(buildModel, { transaction });
+      await perfectRune.setPerfectRune(buildModel, { transaction });
+      await perfectSpirity.setPerfectSpirity(buildModel, { transaction });
+
+      return buildModel;
     })
     .catch(err => {
+      console.log(err);
       return new buildTransactionError();
     });
 });

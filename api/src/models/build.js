@@ -11,21 +11,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
-
-  Build.associate = models => {
-    models.Build.hasOne(models.Item, {
-      as: 'RelatedItem',
-      foreignKey: { name: 'relatedItemId' },
-    });
-    models.Build.hasOne(models.Item, {
-      as: 'PerfectRune',
-      foreignKey: { name: 'perfectRuneId' },
-    });
-    models.Build.hasOne(models.Item, {
-      as: 'PerfectSpirity',
-      foreignKey: { name: 'perfectSpirityId' },
-    });
-  };
-
+  
   return Build;
 };
