@@ -1,16 +1,16 @@
 type Build {
   id: ID!
-  relatedItem: Item
   rarity: String
+  relatedToItem: Item
   perfectRune: Item
-  perfectSpirity: Item
+  perfectSpirityRune: Item
 }
 
 input RegisterBuildInput {
   relatedItemId: ID!
   rarity: String!
-  perfectRuneId: ID!
-  perfectSpirityId: ID!
+  perfectRuneId: String!
+  perfectSpirityRuneId: String!
 }
 
 type Query {

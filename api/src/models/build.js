@@ -11,6 +11,21 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
+
+  Build.associate = models => {
+    models.Build.belongsTo(models.Item, {
+      as: 'RelatedToItem',
+      foreignKey: { name: 'RelatedToItemId' },
+    });
+    models.Build.belongsTo(models.Item, {
+      as: 'PerfectRune',
+      foreignKey: { name: 'PerfectRuneId' },
+    });
+    models.Build.belongsTo(models.Item, {
+      as: 'PerfectSpirityRune',
+      foreignKey: { name: 'PerfectSpirityRuneId' },
+    });
+  };
   
   return Build;
 };

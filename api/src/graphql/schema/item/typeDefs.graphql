@@ -5,6 +5,7 @@ type Item {
   category: String
   tier: String
   itemImage: String
+  perfectBuild: Build
 }
 
 input RegisterItemInput {

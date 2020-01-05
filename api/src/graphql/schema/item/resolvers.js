@@ -9,18 +9,19 @@ import {
   itemTransactionError,
 } from '../../errors';
 
+const getPerfectBuild = baseResolver.createResolver(async root => {
+  return await models.Build.findOne({ where: { RelatedToItemId: root.id } });
+});
+
 const itemById = baseResolver.createResolver(
   async (root, { itemId }) => {
-
-    return await await models.Item.findOne({
-      where: { id: itemId },
-    });
-  }
+    return models.Item.findByPk(itemId);
+  },
 );
 
 const itemByInternalId = isAuthenticatedResolver.createResolver(
   async (root, { itemInternalId }) => {
-    return await models.Item.findById(itemInternalId);
+    return await models.Item.findByPk(itemInternalId);
   }
 );
 
@@ -54,6 +55,9 @@ const registerItem = baseResolver.createResolver(async (root, { input }) => {
 });
 
 export default {
+  Item: {
+    perfectBuild: getPerfectBuild,
+  },
   Query: {
     itemById,
     itemByInternalId,

@@ -25,33 +25,12 @@ export default (sequelize, DataTypes) => {
     },
   });
 
-  // User.prototype.generateHash = function(password, weakSalt = false) {
-  //   return new Promise((resolve, reject) => {
-  //     const saltRounds = process.env.NODE_ENV === 'test' || weakSalt ? 1 : 12;
-  //     bcrypt.genSalt(saltRounds, function(err, salt) {
-  //       if (err) return reject(err);
-  //       bcrypt.hash(password, salt, null, function(err, hash) {
-  //         if (err) return reject(err);
-  //         resolve(hash);
-  //       });
-  //     });
+  // Item.associate = models => {
+  //   models.Item.hasOne(models.Build, {
+  //     as: 'PerfectBuildFrom',
+  //     foreignKey: { name: 'perfectBuildFromId' },
   //   });
   // };
-
-  Item.associate = models => {
-    models.Item.hasOne(models.Build, {
-      as: 'RelatedItem',
-      foreignKey: { name: 'relatedItemId' },
-    });
-    models.Item.hasOne(models.Build, {
-      as: 'PerfectRune',
-      foreignKey: { name: 'perfectRuneId' },
-    });
-    models.Item.hasOne(models.Build, {
-      as: 'PerfectSpirity',
-      foreignKey: { name: 'perfectSpirityId' },
-    });
-  };
 
   return Item;
 };
