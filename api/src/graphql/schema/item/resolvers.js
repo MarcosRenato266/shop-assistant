@@ -13,6 +13,10 @@ const getPerfectBuild = baseResolver.createResolver(async root => {
   return await models.Build.findOne({ where: { RelatedToItemId: root.id } });
 });
 
+const getPrices = baseResolver.createResolver(async root => {
+  return await models.Price.findAll({ where: { PriceFromItemId: root.id } });
+});
+
 const itemById = baseResolver.createResolver(
   async (root, { itemId }) => {
     return models.Item.findByPk(itemId);
@@ -57,6 +61,7 @@ const registerItem = baseResolver.createResolver(async (root, { input }) => {
 export default {
   Item: {
     perfectBuild: getPerfectBuild,
+    prices: getPrices,
   },
   Query: {
     itemById,

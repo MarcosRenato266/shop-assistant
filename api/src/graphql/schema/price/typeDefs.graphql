@@ -1,0 +1,31 @@
+type Price {
+  id: ID!
+  author: Int
+  cheap: String
+  indicated: String
+  expensive: String
+  worksCounter: Int
+  priceFromItem: Item
+}
+
+input NewPriceInput {
+  author: Int
+  cheap: String!
+  indicated: String!
+  expensive: String!
+  priceFromItemId: ID!
+}
+
+input priceWorksCountIncreaseInput {
+  priceId: ID!
+}
+
+type Query {
+  priceById(priceId: String!): Price,
+  priceByItemId(itemId: String!): Price
+}
+
+type Mutation {
+  newPrice(input: NewPriceInput!): Price,
+  priceWorksCountIncrease(input: priceWorksCountIncreaseInput!): Price
+}

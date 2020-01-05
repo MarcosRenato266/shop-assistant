@@ -6,6 +6,7 @@ type Item {
   tier: String
   itemImage: String
   perfectBuild: Build
+  prices: [Price!]
 }
 
 input RegisterItemInput {
