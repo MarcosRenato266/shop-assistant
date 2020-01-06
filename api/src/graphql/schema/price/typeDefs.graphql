@@ -1,19 +1,25 @@
 type Price {
   id: ID!
   author: Int
-  cheap: String
-  indicated: String
-  expensive: String
+  moneyCheap: String
+  moneyIndicated: String
+  moneyExpensive: String
+  gemsCheap: String
+  gemsIndicated: String
+  gemsExpensive: String
   worksCounter: Int
-  priceFromItem: Item
+  priceFromBuild: Build
 }
 
 input NewPriceInput {
   author: Int
-  cheap: String!
-  indicated: String!
-  expensive: String!
-  priceFromItemId: ID!
+  moneyCheap: String!
+  moneyIndicated: String!
+  moneyExpensive: String!
+  gemsCheap: String!
+  gemsIndicated: String!
+  gemsExpensive: String!
+  priceFromBuildId: ID!
 }
 
 input priceWorksCountIncreaseInput {
@@ -22,7 +28,7 @@ input priceWorksCountIncreaseInput {
 
 type Query {
   priceById(priceId: String!): Price,
-  priceByItemId(itemId: String!): Price
+  priceByBuildId(buildId: String!): Price
 }
 
 type Mutation {

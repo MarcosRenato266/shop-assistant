@@ -12,13 +12,22 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    cheap: {
+    moneyCheap: {
       type: DataTypes.STRING,
     },
-    indicated: {
+    moneyIndicated: {
       type: DataTypes.STRING,
     },
-    expensive: {
+    moneyExpensive: {
+      type: DataTypes.STRING,
+    },
+    gemsCheap: {
+      type: DataTypes.STRING,
+    },
+    gemsIndicated: {
+      type: DataTypes.STRING,
+    },
+    gemsExpensive: {
       type: DataTypes.STRING,
     },
     worksCounter: {
@@ -27,9 +36,9 @@ export default (sequelize, DataTypes) => {
   });
 
   Price.associate = models => {
-    models.Price.belongsTo(models.Item, {
-      as: 'PriceFromItem',
-      foreignKey: { name: 'PriceFromItemId' },
+    models.Price.belongsTo(models.Build, {
+      as: 'PriceFromBuild',
+      foreignKey: { name: 'PriceFromBuildId' },
     });
   };
 

@@ -10,6 +10,10 @@ export default (sequelize, DataTypes) => {
     rarity: {
       type: DataTypes.STRING,
     },
+    isPerfect: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 
   Build.associate = models => {

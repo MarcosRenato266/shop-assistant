@@ -10,11 +10,7 @@ import {
 } from '../../errors';
 
 const getPerfectBuild = baseResolver.createResolver(async root => {
-  return await models.Build.findOne({ where: { RelatedToItemId: root.id } });
-});
-
-const getPrices = baseResolver.createResolver(async root => {
-  return await models.Price.findAll({ where: { PriceFromItemId: root.id } });
+  return await models.Build.findOne({ where: { RelatedToItemId: root.internalId } });
 });
 
 const itemById = baseResolver.createResolver(
@@ -61,7 +57,6 @@ const registerItem = baseResolver.createResolver(async (root, { input }) => {
 export default {
   Item: {
     perfectBuild: getPerfectBuild,
-    prices: getPrices,
   },
   Query: {
     itemById,

@@ -5,11 +5,11 @@ export default (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
     },
     internalId:{
       type: DataTypes.STRING,
       unique: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -24,13 +24,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
-
-  // Item.associate = models => {
-  //   models.Item.hasOne(models.Build, {
-  //     as: 'PerfectBuildFrom',
-  //     foreignKey: { name: 'perfectBuildFromId' },
-  //   });
-  // };
 
   return Item;
 };

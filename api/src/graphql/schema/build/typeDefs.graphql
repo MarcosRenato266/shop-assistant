@@ -1,14 +1,17 @@
 type Build {
   id: ID!
   rarity: String
+  isPerfect: Boolean
   relatedToItem: Item
   perfectRune: Item
   perfectSpirityRune: Item
+  prices: [Price!]
 }
 
 input RegisterBuildInput {
   relatedItemId: ID!
   rarity: String!
+  isPerfect: Boolean
   perfectRuneId: String!
   perfectSpirityRuneId: String!
 }

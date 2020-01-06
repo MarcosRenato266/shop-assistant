@@ -27,6 +27,10 @@ const getPerfectSpirityRune = baseResolver.createResolver(
   },
 );
 
+const getPrices = baseResolver.createResolver(async root => {
+  return await models.Price.findAll({ where: { PriceFromBuildId: root.id } });
+});
+
 const buildById = baseResolver.createResolver(
   async (root, { buildId }) => {
     return models.Build.findByPk(buildId);
@@ -41,7 +45,7 @@ const buildItemByInternalId = isAuthenticatedResolver.createResolver(
 
 // Mutation type
 const registerBuild = baseResolver.createResolver(async (root, { input }) => {
-  const { relatedItemId, rarity, perfectRuneId, perfectSpirityRuneId } = input;
+  const { relatedItemId, rarity, perfectRuneId, perfectSpirityRuneId, isPerfect } = input;
 
   if (!relatedItemId || !rarity || !perfectRuneId || !perfectSpirityRuneId) return new buildMissingFields();
 
@@ -66,6 +70,7 @@ const registerBuild = baseResolver.createResolver(async (root, { input }) => {
     .transaction(async transaction => {
       const buildModel = await models.Build.create({
         rarity,
+        isPerfect,
       }, { transaction });
 
       await buildModel.setRelatedToItem(relatedItem, { transaction });
@@ -85,6 +90,7 @@ export default {
     relatedToItem: getRelatedItem,
     perfectRune: getPerfectRune,
     perfectSpirityRune: getPerfectSpirityRune,
+    prices: getPrices,
   },
   Query: {
     buildById,
