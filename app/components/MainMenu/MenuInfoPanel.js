@@ -5,6 +5,7 @@ const InfoPanelArea = styled.div`
   width: 80%;
   display: flex;
   justify-content: flex-start;
+  margin-top: 15px;
 `;
 
 const InfoItem = styled.div`

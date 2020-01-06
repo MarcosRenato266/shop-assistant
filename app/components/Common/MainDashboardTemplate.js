@@ -64,7 +64,7 @@ export default function MainDashboardTemplate(props) {
       <DashboardSafeArea>
         <DashboardMenuArea>
           <LogoImage src="/img/logo_glow.png" />
-          <MainMenu />
+          <MainMenu currentPage={props.currentPage} />
           <FooterHolder>
             <small>ShopAssistant App - Made with love in Brazil</small>
             <br />

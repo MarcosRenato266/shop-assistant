@@ -12,6 +12,10 @@ const ItemSafeArea = styled.div`
     opacity: 0.3;
     font-size: 14px;
     margin-top: 10px;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &.active {
+      opacity: 1 !important;
+    }
   }
 `;
 
@@ -50,15 +54,22 @@ const FunctionsIcon = styled.div`
     border: 2px solid ${props => props.color || "#fff"};
     cursor: pointer;
   }
+  &.active{
+    border: 2px solid ${props => props.color || "#fff"} !important; 
+  }
 `;
 
 export default function ItemMenu(props) {
   return (
     <ItemSafeArea>
-      <FunctionsIcon color={props.color} label={props.label}>
+      <FunctionsIcon
+        color={props.color}
+        label={props.label}
+        className={props.active && "active"}
+      >
         <div>{props.label}</div>
       </FunctionsIcon>
-      <span>{props.title}</span>
+      <span className={props.active && "active"}>{props.title}</span>
     </ItemSafeArea>
   );
 }

@@ -4,16 +4,16 @@
   ],
   "plugins": [
     [
+      "styled-components",
+      {
+        "ssr": true
+      }
+    ],
+    [
       "import",
       {
         "libraryName": "antd",
         "style": "css"
-      }
-    ],
-    [
-      "styled-components",
-      {
-        "ssr": true
       }
     ]
   ]

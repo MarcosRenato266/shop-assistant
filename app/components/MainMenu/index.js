@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MenuInfoPanel from "./MenuInfoPanel";
 import ItemMenu from "./ItemMenu";
@@ -13,10 +13,11 @@ const MainMenuArea = styled.div`
 
 const WelcomeHeader = styled.div`
   color: #fff;
+  margin-bottom: 25px;
   h1 {
     font-weight: 400;
     margin-bottom: 0;
-    line-height: 13px;
+    line-height: 35px;
   }
   h3 {
     font-size: 14px;
@@ -31,6 +32,7 @@ const FunctionsArea = styled.div`
   h3 {
     font-size: 22px;
     font-weight: 400;
+    line-height: 60px;
   }
 `;
 
@@ -39,7 +41,13 @@ const FunctionsIconsArea = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function index() {
+export default function index(props) {
+  const [currentPage, setcurrentPage] = useState(props.currentPage);
+
+  useEffect(() => {
+    setcurrentPage(props.currentPage);
+  }, [props.currentPage]);
+
   return (
     <MainMenuArea>
       <WelcomeHeader>
@@ -50,9 +58,24 @@ export default function index() {
       <FunctionsArea>
         <h3>Ferramentas</h3>
         <FunctionsIconsArea>
-          <ItemMenu label="Itm" title="Ger. Items" color="#2db92b" />
-          <ItemMenu label="Bld" title="Ger. Builds" color="#b9382b" />
-          <ItemMenu label="Prc" title="Ger. Preços" color="#2ba5b9" />
+          <ItemMenu
+            active={currentPage === "Itm" ? true : false}
+            label="Itm"
+            title="Ger. Items"
+            color="#2db92b"
+          />
+          <ItemMenu
+            active={currentPage === "Bld" ? true : false}
+            label="Bld"
+            title="Ger. Builds"
+            color="#b9382b"
+          />
+          <ItemMenu
+            active={currentPage === "Prc" ? true : false}
+            label="Prc"
+            title="Ger. Preços"
+            color="#2ba5b9"
+          />
         </FunctionsIconsArea>
       </FunctionsArea>
     </MainMenuArea>

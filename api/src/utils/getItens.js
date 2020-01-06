@@ -50,7 +50,7 @@ export function getItens() {
         return resultItem;
       });
     });
-
+    
     await browser.close();
 
     //Save all Itens

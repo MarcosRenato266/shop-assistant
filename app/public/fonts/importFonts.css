@@ -4,3 +4,12 @@
 body{
   margin: 0;
 }
+*, *::before, *::after {
+  box-sizing: initial !important;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: initial !important;
+  margin-bottom: initial !important;
+  color: inherit !important;
+  font-weight: initial !important;
+}
