@@ -1,9 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import MainDashboardTemplate from "../components/Common/MainDashboardTemplate";
+import BuildPage from "../components/BuildPage";
 
-export default function builds() {
-  return <MainDashboardTemplate currentPage="Bld">
-    Gerenciar Builds
-  </MainDashboardTemplate>;
+export default function itens() {
+  return (
+    <MainDashboardTemplate currentPage="Bld">
+      <BuildPage />
+    </MainDashboardTemplate>
+  );
 }
