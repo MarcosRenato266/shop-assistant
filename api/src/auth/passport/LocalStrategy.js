@@ -4,15 +4,13 @@ import models from '../../models';
 export default () => {
   return new LocalStrategy(
     {
-      usernameField: 'cpf',
+      usernameField: 'email',
       passwordField: 'password',
     },
-    (cpf, password, done) => {
-      if (!cpf || !password) return done(null, false);
+    (email, password, done) => {
+      if (!email || !password) return done(null, false);
 
-      const cleanCpfValue = cpf;
-
-      models.User.findOne({ where: { cpf: cleanCpfValue } })
+      models.User.findOne({ where: { email: email } })
         .then(user => {
           if (user === null) {
             return done(null, false);

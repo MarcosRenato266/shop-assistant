@@ -15,11 +15,6 @@ export default (sequelize, DataTypes) => {
     pictureUrl: {
       type: DataTypes.STRING,
     },
-    cpf: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -28,7 +23,6 @@ export default (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING(60),
     },
-    fcmToken: DataTypes.STRING,
 
     // ----------------------------------------
     // * Access level

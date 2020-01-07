@@ -1,8 +1,5 @@
 import models from '../../../models';
-import {
-  baseResolver,
-  isAuthenticatedResolver,
-} from '../../baseResolvers';
+import { baseResolver, isAuthenticatedResolver } from '../../baseResolvers';
 import {
   itemMissingFields,
   itemAlreadyExists,
@@ -10,20 +7,24 @@ import {
 } from '../../errors';
 
 const getPerfectBuild = baseResolver.createResolver(async root => {
-  return await models.Build.findOne({ where: { RelatedToItemId: root.internalId } });
+  return await models.Build.findOne({
+    where: { RelatedToItemId: root.internalId },
+  });
 });
 
-const itemById = baseResolver.createResolver(
-  async (root, { itemId }) => {
-    return models.Item.findByPk(itemId);
-  },
-);
+const itemById = baseResolver.createResolver(async (root, { itemId }) => {
+  return models.Item.findByPk(itemId);
+});
 
 const itemByInternalId = isAuthenticatedResolver.createResolver(
   async (root, { itemInternalId }) => {
     return await models.Item.findByPk(itemInternalId);
   }
 );
+
+const getAllItens = baseResolver.createResolver(async () => {
+  return models.Item.findAll();
+});
 
 // Mutation type
 const registerItem = baseResolver.createResolver(async (root, { input }) => {
@@ -61,6 +62,7 @@ export default {
   Query: {
     itemById,
     itemByInternalId,
+    getAllItens,
   },
   Mutation: {
     registerItem,

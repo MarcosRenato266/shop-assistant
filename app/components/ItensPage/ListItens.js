@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Icon } from "antd";
+import { Icon, Input } from "antd";
+let _ = require("lodash");
 
-import { fakeItens } from "../../data/itens";
+const { Search } = Input;
 
 const ItensListArea = styled.div``;
 
-const CategoryArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: scroll;
-  }
-`;
-
-const CategoryItemFilter = styled.div`
-  padding: 5px 20px;
-  background: #e2e2e2;
-  border-radius: 5px;
-  margin-right: 10px;
-  img {
-    width: 35px;
-    pointer-events: none;
-  }
-  &.active {
-    background: #5c3085 !important;
-  }
-  :hover {
-    background: #5c3085;
+const SearchArea = styled.div`
+  padding: 15px;
+  .ant-input {
+    width: -webkit-fill-available !important;
   }
 `;
 
@@ -116,40 +96,35 @@ const ItemEditButton = styled.button`
   color: #fff;
 `;
 
-const groupBy = key => array =>
-  array.reduce((objectsByKeyValue, obj) => {
-    const value = obj[key];
-    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    return objectsByKeyValue;
-  }, {});
+export default function ListItens(props) {
+  const [ItensList, setItensList] = useState(props.data.getAllItens);
 
-const groupByCategory = groupBy("category");
+  // useEffect(() => {
+  //   setItensList(props.data.getAllItens);
+  // }, [props.data]);
 
-export default function ListItens() {
-  const [ItensList, setItensList] = useState(fakeItens);
-  const [ActiveFilter, setActiveFilter] = useState("all");
+  function searchFilter(value) {
+    if (value) {
+      const FilteredList = _.filter(props.data.getAllItens, item => {
+        return _.includes(item.name.toLowerCase(), value.toLowerCase());
+      });
+      setItensList(FilteredList);
+    } else {
+      setItensList(props.data.getAllItens);
+    }
+  }
 
   return (
     <ItensListArea>
-      <CategoryArea>
-        {/* <div>
-          <span onClick={() => setActiveFilter("all")}>
-            <CategoryItemFilter className={ActiveFilter === "all" && "active"}>
-              <img src="https://playshoptitans.com/images/assets/ui/filtertypes/icon_all.png" />
-            </CategoryItemFilter>
-          </span>
-          {Object.keys(groupByCategory(fakeItens)).map((category, key) => (
-            <span onClick={() => setActiveFilter(category)} key={key}>
-              <CategoryItemFilter>
-                <img src={`https://playshoptitans.com${category}`} />
-              </CategoryItemFilter>
-            </span>
-          ))}
-        </div> */}
-      </CategoryArea>
+      <SearchArea>
+        <Search
+          placeholder="Pesquisar Item por nome"
+          onChange={value => searchFilter(value.target.value)}
+        />
+      </SearchArea>
       <ListArea>
-        {ItensList.map(item => (
-          <ListItem>
+        {ItensList.map((item, key) => (
+          <ListItem key={key}>
             <ItemEditButton>
               <Icon type="edit" />
             </ItemEditButton>
@@ -163,7 +138,8 @@ export default function ListItens() {
                 {item.category
                   .split(".")[0]
                   .split("_")
-                  .pop()} - T{item.tier}
+                  .pop()}{" "}
+                - T{item.tier}
               </h3>
               <h1>{item.name}</h1>
             </ItemName>

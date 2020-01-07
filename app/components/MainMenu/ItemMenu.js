@@ -65,11 +65,11 @@ export default function ItemMenu(props) {
       <FunctionsIcon
         color={props.color}
         label={props.label}
-        className={props.active && "active"}
+        className={props.active ? "active" : undefined}
       >
         <div>{props.label}</div>
       </FunctionsIcon>
-      <span className={props.active && "active"}>{props.title}</span>
+      <span className={props.active ? "active" : undefined}>{props.title}</span>
     </ItemSafeArea>
   );
 }

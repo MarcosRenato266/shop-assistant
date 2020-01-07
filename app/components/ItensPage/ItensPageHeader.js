@@ -9,12 +9,12 @@ const ItemMenuArea = styled.div`
     background: #5c3085 !important;
     border: none !important;
   }
-  .ant-page-header{
+  .ant-page-header {
     padding: 16px 9px !important;
   }
 `;
 
-export default function ItensPageHeader() {
+export default function ItensPageHeader(props) {
   function confirmUpdateItens() {
     confirm({
       title: "Você tem certeza que quer fazer isso?",
@@ -29,12 +29,24 @@ export default function ItensPageHeader() {
     });
   }
 
+  function showStatusTag() {
+    if (props.error) {
+      return <Tag color="red">Error</Tag>;
+    } else {
+      return props.loading ? (
+        <Tag color="blue">Carregando ...</Tag>
+      ) : (
+        <Tag color="green">Atualizado</Tag>
+      );
+    }
+  }
+
   return (
     <ItemMenuArea>
       <PageHeader
         onBack={() => window.history.back()}
         title="Gerenciar Itens"
-        tags={<Tag color="green">Atualizado</Tag>}
+        tags={showStatusTag()}
         extra={[
           <Button
             type="primary"

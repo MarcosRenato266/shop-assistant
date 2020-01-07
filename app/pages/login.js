@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import LoginForm from "../components/LoginForm";
 
 const MainLoginWrapper = styled.div`
   width: 100%;
@@ -27,12 +27,17 @@ const PanelHolder = styled.div`
   flex-direction: column;
   margin-top: 30px;
   h1 {
-    color: #fff;
+    color: #fff !important;
+    margin-bottom: 20px !important;
   }
   .ant-btn-primary{
     background: #5d3086 !important;
     border: 0 !important;
     font-size: 17px;
+    width: -webkit-fill-available;
+  }
+  .ant-input{
+    width: -webkit-fill-available !important;
   }
 `;
 
@@ -62,33 +67,7 @@ export default () => (
       <img src="/img/logo_glow.png" />
       <PanelHolder>
         <h1>Login</h1>
-        <Form onSubmit={() => {}}>
-          <Form.Item>
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
-              size="large"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="Password"
-              size="large"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="large"
-              block
-            >
-              Log in
-            </Button>
-          </Form.Item>
-        </Form>
+        <LoginForm />
       </PanelHolder>
       <FooterHolder>
         <small>ShopAssistant App - Made with love in Brazil</small>

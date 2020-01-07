@@ -1,10 +1,9 @@
 const users = [
   {
-    name: 'Novo Usuário',
+    name: 'Nvttz',
     pictureUrl: 'https://i.imgur.com/ueXsnAs.jpg',
-    cpf: '00000000000',
-    email: 'dashboard@teste.com',
-    password: '1234',
+    email: 'marcosrenatovnunes@hotmail.com',
+    password: 'q1w2e3r41515@',
     accessLevel: 1,
   },
 ];

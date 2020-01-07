@@ -20,7 +20,7 @@ const me = isAuthenticatedResolver.createResolver(async (root, _, { user }) => {
 
 const userById = isAuthenticatedResolver.createResolver(
   async (root, { userId }) => {
-    return await models.User.findById(userId);
+    return await models.User.findByPk(userId);
   }
 );
 

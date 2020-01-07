@@ -15,7 +15,7 @@ export default maxAge => {
     if (!payload || !payload.userId) {
       return done(null, false);
     }
-    models.User.findById(payload.userId)
+    models.User.findByPk(payload.userId)
       .then(user => {
         if (user === null) {
           return done(null, false);

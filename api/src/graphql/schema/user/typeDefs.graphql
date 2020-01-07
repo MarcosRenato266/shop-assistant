@@ -2,13 +2,10 @@ type User {
   id: ID!
   name: String
   pictureUrl: String
-  cpf: String!
   asAdmin: Admin
 }
 
 input RegisterUserInput {
-  cpf: String!
-  deviceToken: String!
   password: String!
 }
 

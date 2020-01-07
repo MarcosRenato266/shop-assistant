@@ -19,6 +19,7 @@ input RegisterItemInput {
 type Query {
   itemById(itemId: String!): Item,
   itemByInternalId(itemInternalId: String!): Item
+  getAllItens: [Item!]
 }
 
 type Mutation {
