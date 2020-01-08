@@ -2,18 +2,19 @@ type Item {
   id: ID!
   internalId: String
   name: String
-  category: String
+  category: Category
   tier: String
   itemImage: String
   perfectBuild: Build
+  heroesThatCanUse: [Heroe]
 }
 
 input RegisterItemInput {
   internalId: String!
   name: String!
-  category: String
+  categoryId: String!
   tier: String!
-  itemImage: String
+  itemImage: String!
 }
 
 type Query {

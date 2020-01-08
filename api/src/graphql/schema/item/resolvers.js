@@ -6,10 +6,23 @@ import {
   itemTransactionError,
 } from '../../errors';
 
+const getHeroesThatCanUse = baseResolver.createResolver(async root => {
+  const relatedCategory = await root.getRelatedCategory();
+  const allHeroes = await models.Heroe.findAll();
+
+  return allHeroes.filter(heroe => {
+    return heroe.canUseCategories.includes(relatedCategory.subCategory);
+  });
+});
+
 const getPerfectBuild = baseResolver.createResolver(async root => {
   return await models.Build.findOne({
     where: { RelatedToItemId: root.internalId },
   });
+});
+
+const getCategory = baseResolver.createResolver(async root => {
+  return await root.getRelatedCategory();
 });
 
 const itemById = baseResolver.createResolver(async (root, { itemId }) => {
@@ -28,7 +41,7 @@ const getAllItens = baseResolver.createResolver(async () => {
 
 // Mutation type
 const registerItem = baseResolver.createResolver(async (root, { input }) => {
-  const { internalId, name, category, tier, itemImage } = input;
+  const { internalId, name, categoryId, tier, itemImage } = input;
   if (!internalId || !name || !tier) return new itemMissingFields();
 
   const existentItem = await models.Item.findOne({
@@ -42,7 +55,7 @@ const registerItem = baseResolver.createResolver(async (root, { input }) => {
       const itemModel = await models.Item.build({
         internalId,
         name,
-        category,
+        RelatedCategoryId: categoryId,
         tier,
         itemImage,
       });
@@ -58,6 +71,8 @@ const registerItem = baseResolver.createResolver(async (root, { input }) => {
 export default {
   Item: {
     perfectBuild: getPerfectBuild,
+    category: getCategory,
+    heroesThatCanUse: getHeroesThatCanUse,
   },
   Query: {
     itemById,

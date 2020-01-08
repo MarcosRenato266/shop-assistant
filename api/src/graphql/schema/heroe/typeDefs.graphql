@@ -1,0 +1,56 @@
+type Slot {
+  slotNumber: Int
+  itemsAbleToUse: [String]
+}
+
+type SkillUnlock {
+  newSkillAbleOnLevel: [String]
+}
+
+type Heroe {
+  id: ID
+  className: String
+  subClass: String
+  goldHireCost: String
+  gemsHireCost: String
+  prerequisite: String
+  criticalChancePercent: Int
+  criticalDamageTimes: Int
+  threatRating: Int
+  hp: Int
+  atk: Int
+  def: Int
+  evaPercent: Int
+  element: String
+  canUseCategories: [Category]
+  equipmentSlots: [Slot]
+  skillUnlock: [SkillUnlock]
+}
+
+input RegisterHeroeInput {
+  className: String!
+  subClass: String!
+  goldHireCost: String
+  gemsHireCost: String
+  prerequisite: String
+  criticalChancePercent: Int
+  criticalDamageTimes: Int
+  threatRating: Int
+  hp: Int
+  atk: Int
+  def: Int
+  evaPercent: Int
+  element: String!
+  equipmentSlots: String
+  skillUnlock: String
+}
+
+type Query {
+  heroeById(heroeId: String!): Heroe,
+  heroeByClass(heroeClass: String!): Heroe,
+  heroeByElement(element: String!): Heroe,
+}
+
+type Mutation {
+  registerHeroe(input: RegisterHeroeInput!): Heroe
+}

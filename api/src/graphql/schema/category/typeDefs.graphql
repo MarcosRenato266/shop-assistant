@@ -1,0 +1,10 @@
+type Category {
+  id: ID!
+  categoryName: String
+  subCategory: String
+  categoryImage: String
+}
+
+type Query {
+  categoryById(categoryId: String!): Category
+}

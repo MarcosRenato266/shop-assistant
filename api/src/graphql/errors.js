@@ -48,3 +48,7 @@ export const priceWorksCountMissing = createError('PriceWorksCountMissing', {
 export const priceWorksCountNotFound  = createError('PriceWorksCountNotFound', {
   message: 'Can not found the given Price',
 });
+
+export const HeroeAlreadyExists = createError('HeroeAlreadyExists', {
+  message: 'This Heroe with the given class and subclass already exists.',
+});

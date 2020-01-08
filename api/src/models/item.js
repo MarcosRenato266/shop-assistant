@@ -14,9 +14,6 @@ export default (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
     },
-    category: {
-      type: DataTypes.STRING,
-    },
     tier: {
       type: DataTypes.STRING,
     },
@@ -24,6 +21,13 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
+
+  Item.associate = models => {
+    models.Item.belongsTo(models.Category, {
+      as: 'RelatedCategory',
+      foreignKey: { name: 'RelatedCategoryId' },
+    });
+  };
 
   return Item;
 };

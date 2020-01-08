@@ -37,11 +37,11 @@ export function getItens() {
         const resultItem = {
           internalId: node.querySelector('h2').textContent.replace(/ /g, '_'),
           name: node.querySelector('h2').textContent,
+          tier: node.querySelector('.Tier--Value').textContent,
           category: node
             .querySelector('.Title--Image')
             .style.background.split('("')[1]
             .split('")')[0],
-          tier: node.querySelector('.Tier--Value').textContent,
           itemImage: node
             .querySelector('.ItemImage')
             .style.backgroundImage.split('("')[1]
@@ -50,28 +50,34 @@ export function getItens() {
         return resultItem;
       });
     });
-    
+
     await browser.close();
 
     //Save all Itens
-    allItens.map(itemElement => {
+    allItens.map(async itemElement => {
+      const relatedCategory = await models.Category.findOne({
+        where: { categoryImage: itemElement.category },
+      });
+
       models.sequelize
         .transaction(async transaction => {
-          const itemModel = await models.Item.build({
-            internalId: itemElement.internalId,
-            name: itemElement.name,
-            category: itemElement.category,
-            tier: itemElement.tier,
-            itemImage: itemElement.itemImage,
-          });
-          const item = await itemModel.save({ transaction });
+          const itemModel = await models.Item.create(
+            {
+              internalId: itemElement.internalId,
+              name: itemElement.name,
+              tier: itemElement.tier,
+              itemImage: itemElement.itemImage,
+            },
+            { transaction }
+          );
 
-          return item;
+          await itemModel.setRelatedCategory(relatedCategory, { transaction });
+
+          return itemModel;
         })
         .catch(err => {
           err.code === '23505' && console.log('this item already exists.');
         });
-
     });
   })();
 }
