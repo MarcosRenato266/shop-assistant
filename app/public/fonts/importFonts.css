@@ -1,15 +1,36 @@
-*{
-  font-family: 'Rubik', sans-serif !important;
+* {
+  font-family: "Rubik", sans-serif !important;
 }
-body{
+body {
   margin: 0;
 }
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: initial !important;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: initial !important;
   margin-bottom: initial !important;
   color: inherit !important;
   font-weight: initial !important;
+}
+
+/* static import for dropdown search item in public app */
+.ant-select-dropdown {
+  background-color: #2d325a !important;
+}
+.ant-select-dropdown-menu-item {
+  background-color: #2d325a !important;
+}
+.ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
+  background-color: #202442 !important;
+}
+.cIcon {
+  width: 20px;
 }

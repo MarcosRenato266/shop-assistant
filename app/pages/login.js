@@ -30,13 +30,13 @@ const PanelHolder = styled.div`
     color: #fff !important;
     margin-bottom: 20px !important;
   }
-  .ant-btn-primary{
+  .ant-btn-primary {
     background: #5d3086 !important;
     border: 0 !important;
     font-size: 17px;
     width: -webkit-fill-available;
   }
-  .ant-input{
+  .ant-input {
     width: -webkit-fill-available !important;
   }
 `;
@@ -53,12 +53,25 @@ const FooterHolder = styled.div`
 const ArtPanelArea = styled.div`
   width: 60%;
   height: 100%;
-  background: rgb(43, 29, 43);
+  background: rgba(43, 29, 43, .8);
   background: linear-gradient(
     155deg,
-    rgba(43, 29, 43, 1) 0%,
-    rgba(28, 21, 36, 1) 100%
+    rgba(43, 29, 43, .8) 0%,
+    rgba(28, 21, 36, .8) 100%
   );
+  position: relative;
+
+  :after {
+    content: "";
+    background: url("/img/login-bg.jpg")no-repeat center center / cover;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
 `;
 
 export default () => (

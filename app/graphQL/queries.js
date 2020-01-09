@@ -1,36 +1,48 @@
 import gql from "graphql-tag";
 
+export const getAllCategories = gql`
+  {
+    allCategories {
+      id
+      categoryName
+      subCategory
+      categoryImage
+    }
+  }
+`;
+
 export const getAllItens = gql`
   {
     getAllItens {
       internalId
       name
-      category
+      category {
+        categoryName
+        subCategory
+        categoryImage
+      }
       tier
       itemImage
-      perfectBuild {
-        id
-        rarity
-        isPerfect
-        perfectRune {
-          name
-          itemImage
-        }
-        perfectSpirityRune {
-          name
-          itemImage
-        }
-        prices {
-          author
-          moneyCheap
-          moneyIndicated
-          moneyExpensive
-          gemsCheap
-          gemsIndicated
-          gemsExpensive
-          worksCounter
-        }
+      heroesThatCanUse {
+        className
+        subClass
       }
+    }
+  }
+`;
+
+export const getAllItensForCard = gql`
+  {
+    getAllItens {
+      internalId
+      name
+      category {
+        categoryName
+        subCategory
+        categoryImage
+      }
+      tier
+      itemImage
     }
   }
 `;

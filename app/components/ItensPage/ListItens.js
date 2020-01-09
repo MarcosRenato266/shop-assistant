@@ -135,10 +135,7 @@ export default function ListItens(props) {
             </ItemHeader>
             <ItemName>
               <h3>
-                {item.category
-                  .split(".")[0]
-                  .split("_")
-                  .pop()}{" "}
+                {item.category.subCategory}
                 - T{item.tier}
               </h3>
               <h1>{item.name}</h1>

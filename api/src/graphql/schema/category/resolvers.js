@@ -7,8 +7,13 @@ const categoryById = baseResolver.createResolver(
   }
 );
 
+const allCategories = baseResolver.createResolver(async () => {
+  return models.Category.findAll();
+});
+
 export default {
   Query: {
     categoryById,
+    allCategories,
   },
 };

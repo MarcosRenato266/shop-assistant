@@ -7,4 +7,5 @@ type Category {
 
 type Query {
   categoryById(categoryId: String!): Category
+  allCategories: [Category]
 }
