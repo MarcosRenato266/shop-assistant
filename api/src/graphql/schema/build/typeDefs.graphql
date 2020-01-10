@@ -9,7 +9,7 @@ type Build {
 }
 
 input RegisterBuildInput {
-  relatedItemId: ID!
+  relatedItemId: String!
   rarity: String!
   isPerfect: Boolean
   perfectRuneId: String!

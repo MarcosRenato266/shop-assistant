@@ -16,7 +16,7 @@ const getHeroesThatCanUse = baseResolver.createResolver(async root => {
 });
 
 const getPerfectBuild = baseResolver.createResolver(async root => {
-  return await models.Build.findOne({
+  return await models.Build.findAll({
     where: { RelatedToItemId: root.internalId },
   });
 });

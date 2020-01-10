@@ -1,23 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const ItemElement = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #2d325a;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-left: 2px solid transparent;
-  position: relative;
-  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  :hover {
-    cursor: pointer;
-    border-left: 2px solid #2daf2b;
-  }
-`;
-
 const ItemContent = styled.div`
   width: 50%;
   display: flex;
@@ -105,12 +88,59 @@ const ItemCategoryInfo = styled.div`
   }
 `;
 
+const ItemElement = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2d325a;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 2px solid transparent;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  :hover {
+    cursor: pointer;
+    border-left: 2px solid #2daf2b;
+  }
+  &.active {
+    background: #2daf2b;
+    ${ItemName} {
+      background: #313456;
+    }
+    ${ItemCategoryInfo} {
+      div{
+        color: #313456;
+      }
+      img {
+        background: #3a7d20;
+        border-radius: 100%;
+      }
+    }
+  }
+`;
+
 export default function ItemList(props) {
+  const [SelectedItem, setSelectedItem] = useState("");
+
+  function unCheckIfSelected(item) {
+    SelectedItem === item &&
+      (setSelectedItem(""), props.setSelectedItem(item.internalId));
+  }
+
   return (
     <div>
       {props.itemList.map(item => {
         return (
-          <ItemElement onClick={() => props.setSelectedItem(item.internalId)}>
+          <ItemElement
+            onClick={() => (
+              props.setSelectedItem(item.internalId),
+              setSelectedItem(item.internalId),
+              unCheckIfSelected(item.internalId)
+            )}
+            className={SelectedItem === item.internalId ? "active" : undefined}
+            key={item.internalId}
+          >
             <ItemContent>
               <ItemCategoryInfo>
                 <img

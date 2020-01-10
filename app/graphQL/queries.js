@@ -46,3 +46,70 @@ export const getAllItensForCard = gql`
     }
   }
 `;
+
+export const getItemById = gql`
+  query getitemById($itemId: String!) {
+    itemById(itemId: $itemId) {
+      internalId
+      name
+      category {
+        id
+        categoryName
+        subCategory
+        categoryImage
+      }
+      tier
+      itemImage
+      perfectBuild {
+        id
+        rarity
+        isPerfect
+        perfectRune {
+          name
+          tier
+          itemImage
+        }
+        perfectSpirityRune {
+          internalId
+          name
+          tier
+          itemImage
+        }
+        prices {
+          id
+          author
+          moneyCheap
+          moneyIndicated
+          moneyExpensive
+          gemsCheap
+          gemsIndicated
+          gemsExpensive
+          worksCounter
+        }
+      }
+      heroesThatCanUse {
+        id
+        className
+        subClass
+        goldHireCost
+        gemsHireCost
+        prerequisite
+        criticalChancePercent
+        criticalDamageTimes
+        threatRating
+        hp
+        atk
+        def
+        evaPercent
+        element
+        equipmentSlots {
+          slotNumber
+          itemsAbleToUse
+        }
+        skillUnlock {
+          newSkillAbleOnLevel
+        }
+      }
+    }
+  }
+`;

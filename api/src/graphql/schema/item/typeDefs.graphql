@@ -5,7 +5,7 @@ type Item {
   category: Category
   tier: String
   itemImage: String
-  perfectBuild: Build
+  perfectBuild: [Build]
   heroesThatCanUse: [Heroe]
 }
 

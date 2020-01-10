@@ -61,7 +61,7 @@ export default function SearchItemComponent(props) {
     <SearchItem>
       <Input
         addonAfter={selectCategory}
-        placeholder="Pesquisar Item..."
+        placeholder="Search Item..."
         onChange={e => props.setInputSearch(e.target.value)}
       />
     </SearchItem>
