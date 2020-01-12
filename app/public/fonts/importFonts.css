@@ -21,16 +21,52 @@ h6 {
   font-weight: initial !important;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #25294a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #656a90;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2d325a;
+}
+
 /* static import for dropdown search item in public app */
 .ant-select-dropdown {
   background-color: #2d325a !important;
 }
 .ant-select-dropdown-menu-item {
   background-color: #2d325a !important;
+  color: #fff !important;
 }
 .ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
   background-color: #202442 !important;
 }
 .cIcon {
   width: 20px;
+}
+
+/* static import for modal layout */
+.ant-modal-content {
+  background-color: #2a2d4c !important;
+}
+.ant-modal-header {
+  background: #32365a !important;
+  border-bottom: 1px solid #424569 !important;
+}
+.ant-modal-footer {
+  border-top: 1px solid #424569 !important;
+}
+.ant-modal-title,
+.ant-modal-body {
+  color: #fff !important;
 }

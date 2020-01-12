@@ -47,6 +47,15 @@ export const getAllItensForCard = gql`
   }
 `;
 
+export const getUserBuildItemsById = gql`
+  query getUserBuildItemsById($itemId: String!) {
+    itemById(itemId: $itemId) {
+      name
+      itemImage
+    }
+  }
+`;
+
 export const getItemById = gql`
   query getitemById($itemId: String!) {
     itemById(itemId: $itemId) {

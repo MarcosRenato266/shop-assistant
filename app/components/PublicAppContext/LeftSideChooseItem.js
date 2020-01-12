@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 
 const ItemListWrapper = styled.div`
   padding: 15px;
-  height: 80vh;
   overflow-y: scroll;
   .ant-skeleton.ant-skeleton-active .ant-skeleton-content .ant-skeleton-title,
   .ant-skeleton.ant-skeleton-active

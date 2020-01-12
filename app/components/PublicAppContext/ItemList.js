@@ -109,7 +109,7 @@ const ItemElement = styled.div`
       background: #313456;
     }
     ${ItemCategoryInfo} {
-      div{
+      div {
         color: #313456;
       }
       img {
@@ -124,8 +124,17 @@ export default function ItemList(props) {
   const [SelectedItem, setSelectedItem] = useState("");
 
   function unCheckIfSelected(item) {
-    SelectedItem === item &&
-      (setSelectedItem(""), props.setSelectedItem(item.internalId));
+    SelectedItem === item && (setSelectedItem(""), props.setSelectedItem(""));
+  }
+
+  function handleWithClickOnItem(itemId) {
+    if (itemId === SelectedItem) {
+      props.setSelectedItem("");
+      setSelectedItem("");
+    } else {
+      props.setSelectedItem(itemId);
+      setSelectedItem(itemId);
+    }
   }
 
   return (
@@ -133,11 +142,7 @@ export default function ItemList(props) {
       {props.itemList.map(item => {
         return (
           <ItemElement
-            onClick={() => (
-              props.setSelectedItem(item.internalId),
-              setSelectedItem(item.internalId),
-              unCheckIfSelected(item.internalId)
-            )}
+            onClick={() => handleWithClickOnItem(item.internalId)}
             className={SelectedItem === item.internalId ? "active" : undefined}
             key={item.internalId}
           >

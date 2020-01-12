@@ -29,6 +29,7 @@ export default function ItemWorksForHeroes(props) {
       <HeroeItemList>
         {props.selectedItem.heroesThatCanUse.map(heroe => (
           <HeroeItemCard
+            key={heroe.id}
             class={heroe.className}
             subClass={heroe.subClass}
             critChange={heroe.criticalChancePercent}

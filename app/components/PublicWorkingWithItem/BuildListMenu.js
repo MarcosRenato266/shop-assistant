@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Icon, Tooltip } from "antd";
+import { Icon, Tooltip, Modal } from "antd";
 import BuildItemCard from "./BuildItemCard";
+import SetUserBuildComponent from "./SetUserBuildComponent";
 
 const BuildsListArea = styled.div`
   display: flex;
@@ -62,7 +63,22 @@ const UserEditHerBuild = styled.div`
   justify-content: center;
 `;
 
+const NoData = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #464e7d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 15px;
+`;
+
 export default function BuildListMenu(props) {
+  const [ModalMyBuild, setModalMyBuild] = useState(false);
+
   function returnOrder(isPerfect, rarity) {
     switch (rarity) {
       case "Legendary":
@@ -89,32 +105,53 @@ export default function BuildListMenu(props) {
         </span>
       </BuildListActions>
       <BuildScrollableList>
-        {props.selectedItem.perfectBuild.map(build => (
-          <span
-            key={build.id}
-            onClick={() => props.setSelectedBuild(build.id)}
-            style={{
-              order: returnOrder(build.isPerfect, build.rarity),
-              cursor: "pointer"
-            }}
-          >
-            <BuildItemCard
-              active={props.SelectedBuild === build.id}
-              isPerfect={build.isPerfect}
-              rarity={build.rarity}
-              itemImage={props.selectedItem.itemImage}
-              itemName={props.selectedItem.name}
-              runeImage={build.perfectRune.itemImage}
-              runeName={build.perfectRune.name}
-              spirityRuneImage={build.perfectSpirityRune.itemImage}
-              spirityRuneName={build.perfectSpirityRune.name}
-            />
-          </span>
-        ))}
+        {props.selectedItem.perfectBuild.length > 0 ? (
+          props.selectedItem.perfectBuild.map(build => (
+            <span
+              key={build.id}
+              onClick={() => props.setSelectedBuild(build.id)}
+              style={{
+                order: returnOrder(build.isPerfect, build.rarity),
+                cursor: "pointer"
+              }}
+            >
+              <BuildItemCard
+                active={props.SelectedBuild === build.id}
+                isPerfect={build.isPerfect}
+                rarity={build.rarity}
+                itemImage={props.selectedItem.itemImage}
+                itemName={props.selectedItem.name}
+                runeImage={build.perfectRune.itemImage}
+                runeName={build.perfectRune.name}
+                spirityRuneImage={build.perfectSpirityRune.itemImage}
+                spirityRuneName={build.perfectSpirityRune.name}
+              />
+            </span>
+          ))
+        ) : (
+          <NoData>
+            There is no builds for this item. Click on Submit new Build and be
+            the first
+          </NoData>
+        )}
       </BuildScrollableList>
-      <UserEditHerBuild>
-        <Icon type="edit" />
-      </UserEditHerBuild>
+      <span onClick={() => setModalMyBuild(true)}>
+        <UserEditHerBuild>
+          <Icon type="edit" />
+        </UserEditHerBuild>
+      </span>
+      <Modal
+        title="Setup your item build and compare"
+        visible={ModalMyBuild}
+        onOk={() => setModalMyBuild(false)}
+        onCancel={() => setModalMyBuild(false)}
+        okText={"Set My Item"}
+      >
+        <SetUserBuildComponent
+          UserBuild={props.UserBuild}
+          setUserBuild={props.setUserBuild}
+        />
+      </Modal>
     </BuildsListArea>
   );
 }

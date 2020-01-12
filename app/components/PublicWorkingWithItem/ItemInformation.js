@@ -20,6 +20,12 @@ const ItemImageAndInfoImage = styled.div`
     width: 150px;
     position: relative;
     z-index: 99;
+    filter: drop-shadow(-1px -1px 0 ${props => props.rarity}b5)
+      drop-shadow(1px 1px 0 ${props => props.rarity}b5)
+      drop-shadow(1px -1px 0 ${props => props.rarity}b5)
+      drop-shadow(-1px 1px 0 ${props => props.rarity}b5)
+      drop-shadow(0 0 3px ${props => props.rarity}b5)
+      drop-shadow(0 0 3px ${props => props.rarity}b5);
   }
 `;
 
@@ -56,9 +62,28 @@ const ItemImageAndInfo = styled.div`
 `;
 
 export default function ItemInformation(props) {
+  const findedBuild = props.buildList.find(build => {
+    return build.id === props.SelectedBuild;
+  });
+
+  function returnColorOfRarity() {
+    switch (findedBuild.rarity) {
+      case "Legendary":
+        return "#febb12";
+      case "Epic":
+        return "#c412fe";
+      case "Magistral":
+        return "#12bdfe";
+      case "Superior":
+        return "#2bfe12";
+      default:
+        return "transparent";
+    }
+  }
+
   return (
     <ItemImageAndInfo>
-      <ItemImageAndInfoImage>
+      <ItemImageAndInfoImage rarity={returnColorOfRarity}>
         <img
           src={`https://playshoptitans.com${props.selectedItem.itemImage}`}
         />

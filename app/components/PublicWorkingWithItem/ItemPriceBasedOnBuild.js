@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import BuildItemCardOnPrice from "./BuildItemCardOnPrice";
+import BuildItemCardOnPriceUser from "./BuildItemCardOnPriceUser";
+import { Carousel, Icon } from "antd";
 
 const ItemPricesBasedBuild = styled.div`
   background: transparent;
+  span {
+    color: #fff !important;
+  }
 `;
 
 const TitleSection = styled.div`
@@ -14,7 +20,6 @@ const TitleSection = styled.div`
   font-size: 14px;
   font-weight: 100;
   color: #fff;
-  margin-bottom: 15px;
 `;
 
 const PriceRow = styled.div`
@@ -24,6 +29,44 @@ const PriceRow = styled.div`
   padding: 15px;
   background: #2a2f52;
   margin-bottom: 20px;
+  opacity: ${props => props.opacity};
+`;
+
+const PreviousArrow = styled.div`
+  font-size: 28px;
+  color: #626aa0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+const NextArrow = styled.div`
+  font-size: 28px;
+  color: #626aa0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+const CarouselHolder = styled.div`
+  position: relative;
+  flex: 1;
+  ${PreviousArrow} {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+  }
+  ${NextArrow} {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+  }
 `;
 
 const PriceItem = styled.div`
@@ -73,10 +116,28 @@ const PriceImages = styled.div`
   }
 `;
 
+const NoData = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #464e7d;
+  margin-bottom: 20px;
+`;
+
+const ItemOnPriceHolder = styled.div`
+  width: 30%;
+  margin: 0 auto;
+`;
+
 export default function ItemPriceBasedOnBuild(props) {
   const [PriceContent, setPriceContent] = useState(
     filterPriceOfSelectedBuildAndCount()
   );
+
+  const priceCarouselRef = useRef("");
 
   useEffect(() => {
     setPriceContent(filterPriceOfSelectedBuildAndCount());
@@ -87,6 +148,10 @@ export default function ItemPriceBasedOnBuild(props) {
       return build.id === props.SelectedBuild;
     });
 
+    if (!findedBuild || !findedBuild.prices) {
+      return false;
+    }
+
     const PriceSorted = findedBuild.prices.sort((a, b) => {
       if (a.worksCounter > b.worksCounter) {
         return -1;
@@ -96,6 +161,11 @@ export default function ItemPriceBasedOnBuild(props) {
       }
       return 0;
     });
+
+    if (!PriceSorted || PriceSorted.length <= 0) {
+      return false;
+    }
+
     return PriceSorted;
   }
 
@@ -105,67 +175,103 @@ export default function ItemPriceBasedOnBuild(props) {
     }, 0);
   }
 
-  function returnPercentageOfWork() {
+  function returnPercentageOfWork(price) {
     return Math.round(
-      (PriceContent[0].worksCounter * 100) / count(PriceContent, "worksCounter")
+      (price.worksCounter * 100) / count(PriceContent, "worksCounter")
     );
   }
 
-  console.log(PriceContent);
+  if (PriceContent === false) {
+    return (
+      <NoData>We can't be able to find builds or prices for this item</NoData>
+    );
+  }
+
+  console.log(priceCarouselRef);
+
   return (
     <ItemPricesBasedBuild>
       <TitleSection>Perfect Build Price</TitleSection>
-      <PriceRow>
-        <PriceItem>
-          <LabelPrice>
-            <span></span>
-            <span className="cheap">Cheap</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
-              {PriceContent[0].moneyCheap}
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              {PriceContent[0].gemsCheap}
-            </span>
-          </PriceImages>
-        </PriceItem>
-        <PriceItem>
-          <LabelPrice>
-            {`Work ${returnPercentageOfWork()}% of the time`}
-            <span className="indicated">Indicated</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
-              {PriceContent[0].moneyIndicated}
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              {PriceContent[0].gemsIndicated}
-            </span>
-          </PriceImages>
-        </PriceItem>
-        <PriceItem>
-          <LabelPrice>
-            <span></span>
-            <span className="expensive">Expensive</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
-              {PriceContent[0].moneyExpensive}
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              {PriceContent[0].gemsExpensive}
-            </span>
-          </PriceImages>
-        </PriceItem>
-      </PriceRow>
+      <ItemOnPriceHolder>
+        <BuildItemCardOnPrice
+          buildData={props.buildList.find(
+            build => build.id === props.SelectedBuild
+          )}
+        />
+      </ItemOnPriceHolder>
+      <CarouselHolder>
+        <PreviousArrow
+          onClick={() => priceCarouselRef.current.slick.slickPrev()}
+        >
+          <Icon type="caret-left" />
+        </PreviousArrow>
+        <NextArrow onClick={() => priceCarouselRef.current.slick.slickNext()}>
+          <Icon type="caret-right" />
+        </NextArrow>
+        <Carousel dots={false} ref={priceCarouselRef}>
+          {PriceContent.map((price, key) => (
+            <div>
+              <PriceRow key={price.id} opacity={key === 0 ? 1 : .5}>
+                <PriceItem>
+                  <LabelPrice>
+                    <span></span>
+                    <span className="cheap">Cheap</span>
+                  </LabelPrice>
+                  <PriceImages>
+                    <span>
+                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      {price.moneyCheap}
+                    </span>
+                    <span>
+                      <img src="/images/assets/ui/currency_gems.png" />
+                      {price.gemsCheap}
+                    </span>
+                  </PriceImages>
+                </PriceItem>
+                <PriceItem>
+                  <LabelPrice>
+                    {`Work ${returnPercentageOfWork(price)}% of the time`}
+                    <span className="indicated">Indicated</span>
+                  </LabelPrice>
+                  <PriceImages>
+                    <span>
+                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      {price.moneyIndicated}
+                    </span>
+                    <span>
+                      <img src="/images/assets/ui/currency_gems.png" />
+                      {price.gemsIndicated}
+                    </span>
+                  </PriceImages>
+                </PriceItem>
+                <PriceItem>
+                  <LabelPrice>
+                    <span></span>
+                    <span className="expensive">Expensive</span>
+                  </LabelPrice>
+                  <PriceImages>
+                    <span>
+                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      {price.moneyExpensive}
+                    </span>
+                    <span>
+                      <img src="/images/assets/ui/currency_gems.png" />
+                      {price.gemsExpensive}
+                    </span>
+                  </PriceImages>
+                </PriceItem>
+              </PriceRow>
+            </div>
+          ))}
+        </Carousel>
+      </CarouselHolder>
+
       <TitleSection>Price For Your Item</TitleSection>
+      <ItemOnPriceHolder>
+        {PriceContent && (
+          <BuildItemCardOnPriceUser userBuildData={props.UserBuild} />
+        )}
+      </ItemOnPriceHolder>
       <PriceRow>
         <PriceItem>
           <LabelPrice>
