@@ -219,7 +219,7 @@ export default function ItemPriceBasedOnBuild(props) {
                   </LabelPrice>
                   <PriceImages>
                     <span>
-                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      <img src="images/assets/ui/currency_gold.png" />
                       {price.moneyCheap}
                     </span>
                     <span>
@@ -235,7 +235,7 @@ export default function ItemPriceBasedOnBuild(props) {
                   </LabelPrice>
                   <PriceImages>
                     <span>
-                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      <img src="images/assets/ui/currency_gold.png" />
                       {price.moneyIndicated}
                     </span>
                     <span>
@@ -251,7 +251,7 @@ export default function ItemPriceBasedOnBuild(props) {
                   </LabelPrice>
                   <PriceImages>
                     <span>
-                      <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+                      <img src="images/assets/ui/currency_gold.png" />
                       {price.moneyExpensive}
                     </span>
                     <span>
@@ -280,7 +280,7 @@ export default function ItemPriceBasedOnBuild(props) {
           </LabelPrice>
           <PriceImages>
             <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+              <img src="images/assets/ui/currency_gold.png" />
               200k
             </span>
             <span>
@@ -296,7 +296,7 @@ export default function ItemPriceBasedOnBuild(props) {
           </LabelPrice>
           <PriceImages>
             <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+              <img src="images/assets/ui/currency_gold.png" />
               200k
             </span>
             <span>
@@ -312,7 +312,7 @@ export default function ItemPriceBasedOnBuild(props) {
           </LabelPrice>
           <PriceImages>
             <span>
-              <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+              <img src="images/assets/ui/currency_gold.png" />
               200k
             </span>
             <span>

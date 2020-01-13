@@ -88,13 +88,13 @@ export default function HeroeItemCard(props) {
   function returnItemBasedOnHeroeClass(heroeClass) {
     switch (heroeClass) {
       case "fighter":
-        return "https://playshoptitans.com/images/assets/ui/itemtypes/icon_weapon_sword.png";
+        return "images/assets/ui/itemtypes/icon_weapon_sword.png";
       case "rogue":
-        return "https://playshoptitans.com/images/assets/ui/itemtypes/icon_weapon_dagger.png";
+        return "images/assets/ui/itemtypes/icon_weapon_dagger.png";
       case "spellcaster":
-        return "https://playshoptitans.com/images/assets/ui/itemtypes/icon_weapon_staff.png";
+        return "images/assets/ui/itemtypes/icon_weapon_staff.png";
       default:
-        return "https://playshoptitans.com/images/assets/ui/itemtypes/icon_weapon_sword.png";
+        return "images/assets/ui/itemtypes/icon_weapon_sword.png";
     }
   }
   return (

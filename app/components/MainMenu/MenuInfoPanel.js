@@ -39,19 +39,19 @@ export default function MenuInfoPanel() {
     <InfoPanelArea>
       <InfoItem>
         <ImageIconArea>
-          <img src="https://playshoptitans.com/images/assets/ui/itemtypes/icon_weapon_sword.png" />
+          <img src="images/assets/ui/itemtypes/icon_weapon_sword.png" />
         </ImageIconArea>
         <h6>365 Itens</h6>
       </InfoItem>
       <InfoItem>
         <ImageIconArea>
-          <img src="https://playshoptitans.com/images/assets/ui/currency_gold.png" />
+          <img src="images/assets/ui/currency_gold.png" />
         </ImageIconArea>
         <h6>3000 Prices</h6>
       </InfoItem>
       <InfoItem>
         <ImageIconArea>
-          <img src="https://playshoptitans.com/images/assets/items/ironspear.png" />
+          <img src="images/assets/items/ironspear.png" />
         </ImageIconArea>
         <h6>2650 Builds</h6>
       </InfoItem>

@@ -139,17 +139,17 @@ export default function BuildItemCard(props) {
       </BuildItemRow>
       <RunesCombine>
         <div>
-          <img src={`https://playshoptitans.com${props.itemImage}`} />
+          <img src={`${props.itemImage}`} />
           <span>{props.itemName}</span>
         </div>
         <RunesCombineDivider> = </RunesCombineDivider>
         <div>
-          <img src={`https://playshoptitans.com${props.runeImage}`} />
+          <img src={`${props.runeImage}`} />
           <span>{props.runeName}</span>
         </div>
         <RunesCombineDivider>+</RunesCombineDivider>
         <div>
-          <img src={`https://playshoptitans.com${props.spirityRuneImage}`} />
+          <img src={`${props.spirityRuneImage}`} />
           <span>{props.spirityRuneName}</span>
         </div>
       </RunesCombine>

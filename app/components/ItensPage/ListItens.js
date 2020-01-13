@@ -141,7 +141,7 @@ export default function ListItens(props) {
               <h1>{item.name}</h1>
             </ItemName>
             <ItemImage>
-              <img src={`https://playshoptitans.com${item.itemImage}`} />
+              <img src={`${item.itemImage}`} />
             </ItemImage>
           </ListItem>
         ))}

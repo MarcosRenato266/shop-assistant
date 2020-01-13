@@ -53,14 +53,14 @@ export default function BuildItemCardOnCard(props) {
       <RunesCombine>
         <div>
           <img
-            src={`https://playshoptitans.com${props.buildData.perfectRune.itemImage}`}
+            src={`${props.buildData.perfectRune.itemImage}`}
           />
           <span>{props.buildData.perfectRune.name}</span>
         </div>
         <RunesCombineDivider>+</RunesCombineDivider>
         <div>
           <img
-            src={`https://playshoptitans.com${props.buildData.perfectSpirityRune.itemImage}`}
+            src={`${props.buildData.perfectSpirityRune.itemImage}`}
           />
           <span>{props.buildData.perfectSpirityRune.name}</span>
         </div>

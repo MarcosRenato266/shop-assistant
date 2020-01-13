@@ -77,7 +77,7 @@ export default function SetUserBuildComponent(props) {
         <div>
           {props.UserBuild.runeId && (
             <img
-              src={`https://playshoptitans.com/${
+              src={`${
                 itemList.data.getAllItens.find(
                   item => item.internalId === props.UserBuild.runeId
                 ).itemImage
@@ -88,7 +88,7 @@ export default function SetUserBuildComponent(props) {
         <div>
           {props.UserBuild.spirityRuneId && (
             <img
-              src={`https://playshoptitans.com/${
+              src={`${
                 itemList.data.getAllItens.find(
                   item => item.internalId === props.UserBuild.spirityRuneId
                 ).itemImage

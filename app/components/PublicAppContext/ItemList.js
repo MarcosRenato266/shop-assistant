@@ -149,7 +149,7 @@ export default function ItemList(props) {
             <ItemContent>
               <ItemCategoryInfo>
                 <img
-                  src={`https://playshoptitans.com${item.category.categoryImage}`}
+                  src={`${item.category.categoryImage}`}
                 />
                 <div>
                   {item.category.categoryName}
@@ -159,7 +159,7 @@ export default function ItemList(props) {
               <ItemName>{item.name}</ItemName>
             </ItemContent>
             <ItemImage>
-              <img src={`https://playshoptitans.com${item.itemImage}`} />
+              <img src={`${item.itemImage}`} />
               <ItemTier>{item.tier}</ItemTier>
             </ItemImage>
           </ItemElement>

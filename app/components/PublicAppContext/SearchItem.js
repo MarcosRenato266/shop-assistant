@@ -42,7 +42,7 @@ export default function SearchItemComponent(props) {
       <Option value="all">
         <img
           className="cIcon"
-          src="https://playshoptitans.com/images/assets/ui/filtertypes/icon_all.png"
+          src="images/assets/ui/filtertypes/icon_all.png"
         />
       </Option>
       {fetchCategories.data.allCategories &&
@@ -50,7 +50,7 @@ export default function SearchItemComponent(props) {
           <Option value={category.subCategory} key={category.id}>
             <img
               className="cIcon"
-              src={`https://playshoptitans.com${category.categoryImage}`}
+              src={`${category.categoryImage}`}
             />
           </Option>
         ))}

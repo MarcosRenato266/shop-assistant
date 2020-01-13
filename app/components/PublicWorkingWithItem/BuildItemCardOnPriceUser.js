@@ -64,14 +64,14 @@ export default function BuildItemCardOnCardUser(props) {
       <RunesCombine>
         <div>
           <img
-            src={`https://playshoptitans.com${runeInfo.data.itemById.itemImage}`}
+            src={`${runeInfo.data.itemById.itemImage}`}
           />
           <span>{runeInfo.data.itemById.name}</span>
         </div>
         <RunesCombineDivider>+</RunesCombineDivider>
         <div>
           <img
-            src={`https://playshoptitans.com${spirityRuneInfo.data.itemById.itemImage}`}
+            src={`${spirityRuneInfo.data.itemById.itemImage}`}
           />
           <span>{spirityRuneInfo.data.itemById.name}</span>
         </div>

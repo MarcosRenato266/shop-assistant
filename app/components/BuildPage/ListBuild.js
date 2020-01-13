@@ -190,14 +190,14 @@ export default function ListBuild() {
         <BuildContent>
           <BuildImage>
             <img
-              src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+              src={`images/assets/items/ruinssword.png`}
             />
           </BuildImage>
           <PerfectBuild>
             <div>
               <span>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                  src={`images/assets/items/flaming.png`}
                 />
               </span>
               <p>Ember</p>
@@ -205,7 +205,7 @@ export default function ListBuild() {
             <div>
               <span>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                  src={`images/assets/items/owl.png`}
                 />
               </span>
               <p>Owl</p>
@@ -215,13 +215,13 @@ export default function ListBuild() {
             <OtherItem>
               <BuildImage>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+                  src={`images/assets/items/ruinssword.png`}
                 />
               </BuildImage>
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                    src={`images/assets/items/flaming.png`}
                   />
                 </span>
                 <p>Ember</p>
@@ -229,7 +229,7 @@ export default function ListBuild() {
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                    src={`images/assets/items/owl.png`}
                   />
                 </span>
                 <p>Owl</p>
@@ -238,13 +238,13 @@ export default function ListBuild() {
             <OtherItem>
               <BuildImage>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+                  src={`images/assets/items/ruinssword.png`}
                 />
               </BuildImage>
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                    src={`images/assets/items/flaming.png`}
                   />
                 </span>
                 <p>Ember</p>
@@ -252,7 +252,7 @@ export default function ListBuild() {
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                    src={`images/assets/items/owl.png`}
                   />
                 </span>
                 <p>Owl</p>
@@ -261,13 +261,13 @@ export default function ListBuild() {
             <OtherItem>
               <BuildImage>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+                  src={`images/assets/items/ruinssword.png`}
                 />
               </BuildImage>
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                    src={`images/assets/items/flaming.png`}
                   />
                 </span>
                 <p>Ember</p>
@@ -275,7 +275,7 @@ export default function ListBuild() {
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                    src={`images/assets/items/owl.png`}
                   />
                 </span>
                 <p>Owl</p>
@@ -284,13 +284,13 @@ export default function ListBuild() {
             <OtherItem>
               <BuildImage>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+                  src={`images/assets/items/ruinssword.png`}
                 />
               </BuildImage>
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                    src={`images/assets/items/flaming.png`}
                   />
                 </span>
                 <p>Ember</p>
@@ -298,7 +298,7 @@ export default function ListBuild() {
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                    src={`images/assets/items/owl.png`}
                   />
                 </span>
                 <p>Owl</p>
@@ -307,13 +307,13 @@ export default function ListBuild() {
             <OtherItem>
               <BuildImage>
                 <img
-                  src={`https://playshoptitans.com/images/assets/items/ruinssword.png`}
+                  src={`images/assets/items/ruinssword.png`}
                 />
               </BuildImage>
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/flaming.png`}
+                    src={`images/assets/items/flaming.png`}
                   />
                 </span>
                 <p>Ember</p>
@@ -321,7 +321,7 @@ export default function ListBuild() {
               <div>
                 <span>
                   <img
-                    src={`https://playshoptitans.com/images/assets/items/owl.png`}
+                    src={`images/assets/items/owl.png`}
                   />
                 </span>
                 <p>Owl</p>

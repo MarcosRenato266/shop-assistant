@@ -89,7 +89,7 @@ export default function ItemInformation(props) {
     <ItemImageAndInfo>
       <ItemImageAndInfoImage rarity={returnColorOfRarity}>
         <img
-          src={`https://playshoptitans.com${props.selectedItem.itemImage}`}
+          src={`${props.selectedItem.itemImage}`}
         />
       </ItemImageAndInfoImage>
       <ItemImageAndInfoContent>
