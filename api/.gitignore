@@ -71,3 +71,6 @@ sendgrid.env
 
 # firebase admin sdk 
 firebase-adminsdk.json
+
+#Images download from site
+/api/src/utils/images/

@@ -10,6 +10,7 @@ import http from 'http';
 import cors from 'cors';
 import passport from 'passport';
 import updateLists from '../utils/updateLists';
+import { getAssetsForFront } from '../utils/getAssetsForFront';
 
 import auth from '../auth';
 import schema from '../graphql';
@@ -74,8 +75,18 @@ const start = options => {
     app.get('/updateList', (req, res) => {
       //const { password } = req.body;
       // password === "q1w2e3r41515@" ? updateLists() : res.send('you have no permission for that');
-      res.send('Atualizando Lista de itens, Esse processo pode levar algum tempo.');
+      res.send(
+        'Atualizando Lista de itens, Esse processo pode levar algum tempo.'
+      );
       updateLists();
+      res.end();
+    });
+
+    app.get('/downloadAllImages', (req, res) => {
+      //const { password } = req.body;
+      // password === "q1w2e3r41515@" ? updateLists() : res.send('you have no permission for that');
+      res.send('Baixando todas as imagens');
+      getAssetsForFront();
       res.end();
     });
 

@@ -2,7 +2,6 @@ import chalk from 'chalk';
 import models from './models';
 import server from './server';
 import setupDatabase from './server/setupDatabase';
-import updateList from './utils/updateLists';
 
 console.log(chalk.blue('== Shop Assistant loading... =='));
 

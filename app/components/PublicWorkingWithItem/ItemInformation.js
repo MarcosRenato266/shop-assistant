@@ -67,17 +67,21 @@ export default function ItemInformation(props) {
   });
 
   function returnColorOfRarity() {
-    switch (findedBuild.rarity) {
-      case "Legendary":
-        return "#febb12";
-      case "Epic":
-        return "#c412fe";
-      case "Magistral":
-        return "#12bdfe";
-      case "Superior":
-        return "#2bfe12";
-      default:
-        return "transparent";
+    if (findedBuild) {
+      switch (findedBuild.rarity) {
+        case "Legendary":
+          return "#febb12";
+        case "Epic":
+          return "#c412fe";
+        case "Magistral":
+          return "#12bdfe";
+        case "Superior":
+          return "#2bfe12";
+        default:
+          return "transparent";
+      }
+    } else {
+      return "transparent";
     }
   }
 
