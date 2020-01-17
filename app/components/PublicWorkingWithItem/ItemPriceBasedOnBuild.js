@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import BuildItemCardOnPrice from "./BuildItemCardOnPrice";
-import BuildItemCardOnPriceUser from "./BuildItemCardOnPriceUser";
+import PriceDevelopedForUserItem from "./PriceDevelopedForUserItem";
 import { Carousel, Icon } from "antd";
 
 const ItemPricesBasedBuild = styled.div`
@@ -187,7 +187,7 @@ export default function ItemPriceBasedOnBuild(props) {
     );
   }
 
-  console.log(priceCarouselRef);
+  console.log(props.UserBuild.runeId, props.UserBuild.runeSpirityId);
 
   return (
     <ItemPricesBasedBuild>
@@ -211,7 +211,7 @@ export default function ItemPriceBasedOnBuild(props) {
         <Carousel dots={false} ref={priceCarouselRef}>
           {PriceContent.map((price, key) => (
             <div>
-              <PriceRow key={price.id} opacity={key === 0 ? 1 : .5}>
+              <PriceRow key={price.id} opacity={key === 0 ? 1 : 0.5}>
                 <PriceItem>
                   <LabelPrice>
                     <span></span>
@@ -267,61 +267,17 @@ export default function ItemPriceBasedOnBuild(props) {
       </CarouselHolder>
 
       <TitleSection>Price For Your Item</TitleSection>
-      <ItemOnPriceHolder>
-        {PriceContent && (
-          <BuildItemCardOnPriceUser userBuildData={props.UserBuild} />
-        )}
-      </ItemOnPriceHolder>
-      <PriceRow>
-        <PriceItem>
-          <LabelPrice>
-            28%
-            <span className="cheap">Cheap</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="images/assets/ui/currency_gold.png" />
-              200k
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              30
-            </span>
-          </PriceImages>
-        </PriceItem>
-        <PriceItem>
-          <LabelPrice>
-            28%
-            <span className="indicated">Indicated</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="images/assets/ui/currency_gold.png" />
-              200k
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              30
-            </span>
-          </PriceImages>
-        </PriceItem>
-        <PriceItem>
-          <LabelPrice>
-            28%
-            <span className="expensive">Expensive</span>
-          </LabelPrice>
-          <PriceImages>
-            <span>
-              <img src="images/assets/ui/currency_gold.png" />
-              200k
-            </span>
-            <span>
-              <img src="/images/assets/ui/currency_gems.png" />
-              30
-            </span>
-          </PriceImages>
-        </PriceItem>
-      </PriceRow>
+      {props.UserBuild.runeId.includes("Runestone") ||
+      props.UserBuild.spirityRuneId.includes("Runestone") ? (
+        <NoData style={{ marginTop: 30, marginBottom: 30 }}>
+          Setup your Item configs on Blue Button to check a price developed for
+          you
+        </NoData>
+      ) : (
+        <>
+          <PriceDevelopedForUserItem UserBuild={props.UserBuild} />
+        </>
+      )}
     </ItemPricesBasedBuild>
   );
 }

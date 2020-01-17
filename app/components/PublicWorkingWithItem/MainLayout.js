@@ -52,8 +52,44 @@ export default function MainLayout(props) {
   });
 
   useEffect(() => {
+    UserBuild.runeId.includes("Runestone") ||
+    UserBuild.spirityRuneId.includes("Runestone")
+      ? undefined
+      : FindMostProximityBuild();
+  }, [UserBuild]);
+
+  useEffect(() => {
     setSelectedBuild(returnMostImportantBuildId());
   }, [props.selectedItem]);
+
+  function FindMostProximityBuild() {
+    UserBuild === "" && setUserBuild({ ...UserBuild, rarity: "Common" });
+
+    // Check if has Perfect Match
+    const PerfectRelation = props.selectedItem.perfectBuild.find(build => {
+      return (
+        build.rarity.toLowerCase() === UserBuild.rarity.toLowerCase() &&
+        build.perfectRune.internalId === UserBuild.runeId &&
+        build.perfectSpirityRune.internalId === UserBuild.spirityRuneId
+      );
+    });
+
+    if (PerfectRelation) {
+      setSelectedBuild(PerfectRelation.id);
+    } else {
+      const StartWithRarity = props.selectedItem.perfectBuild.filter(
+        build => build.rarity.toLowerCase() === UserBuild.rarity.toLowerCase()
+      );
+      const StartWithRune = props.selectedItem.perfectBuild.filter(
+        build => build.perfectRune.internalId === UserBuild.runeId
+      );
+      const StartWithSpirityRune = props.selectedItem.perfectBuild.filter(
+        build => build.perfectSpirityRune.internalId === UserBuild.spirityRuneId
+      );
+    }
+  }
+
+  console.log("123", props.selectedItem.perfectBuild);
 
   function returnMostImportantBuildId() {
     const ImportantBuild = props.selectedItem.perfectBuild.find(build => {

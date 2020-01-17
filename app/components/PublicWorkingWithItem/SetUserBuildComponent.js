@@ -147,9 +147,9 @@ export default function SetUserBuildComponent(props) {
       </BuildForItem>
       <RarityGroup>
         <Radio.Group
-        // onChange={e => {
-        //   setNewBuildInput({ ...NewBuildInput, rarity: e.target.value });
-        // }}
+          onChange={e =>
+            props.setUserBuild({ ...props.UserBuild, rarity: e.target.value })
+          }
         >
           <Radio.Button value="legendary">Legendary</Radio.Button>
           <Radio.Button value="epic">Epic</Radio.Button>

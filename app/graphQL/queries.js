@@ -74,6 +74,7 @@ export const getItemById = gql`
         rarity
         isPerfect
         perfectRune {
+          internalId
           name
           tier
           itemImage
