@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Select, Button, Radio, notification } from "antd";
 import { getAllItensForCard } from "../../graphQL/queries";
-import { useQuery } from "react-apollo-hooks";
+import { CreateNewBuild } from "../../graphQL/mutations";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import styled from "styled-components";
 
 const { Option } = Select;
@@ -13,11 +14,23 @@ const openNotificationWithIcon = (type, title, message) => {
   });
 };
 
+const SetBuildWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  span {
+    .ant-btn {
+      width: -webkit-fill-available !important;
+      margin: 30px auto 10px auto !important;
+    }
+  }
+`;
+
 const RarityGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
   .ant-radio-button-wrapper {
     color: rgb(110, 113, 148) !important;
     background: #32375a !important;
@@ -58,13 +71,6 @@ const RarityGroup = styled.div`
   }
 `;
 
-const SetBuildWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;
-
 const SelectInputs = styled.div`
   display: flex;
   align-items: center;
@@ -88,6 +94,23 @@ const SelectInputs = styled.div`
   }
 `;
 
+const BuildForItem = styled.div`
+  letter-spacing: 2px;
+  font-weight: 100;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #525794;
+  margin-bottom: 12px;
+  h3 {
+    color: #fff !important;
+    font-weight: 400 !important;
+    font-size: 23px;
+  }
+`;
+
 const SelectedItensImages = styled.div`
   display: flex;
   flex: 1;
@@ -96,6 +119,8 @@ const SelectedItensImages = styled.div`
   margin-bottom: 15px;
   div {
     position: relative;
+    min-height: 140px;
+    min-width: 140px;
     :after {
       content: "";
       width: 110px;
@@ -116,25 +141,45 @@ const SelectedItensImages = styled.div`
   }
 `;
 
-const BuildForItem = styled.div`
-  letter-spacing: 2px;
-  font-weight: 100;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: #525794;
-  margin-bottom: 12px;
-  h3 {
-    color: #fff !important;
-    font-weight: 400 !important;
-    font-size: 23px;
-  }
-`;
+export default function SubmitNewBuild(props) {
+  const [NewBuildInput, setNewBuildInput] = useState({
+    relatedItemId: props.selectedItem.internalId,
+    rarity: "",
+    isPerfect: false,
+    perfectRuneId: "",
+    perfectSpirityRuneId: ""
+  });
 
-export default function SetUserBuildComponent(props) {
+  const MutateCreateNewBuild = useMutation(CreateNewBuild);
   const itemList = useQuery(getAllItensForCard);
+
+  function HandleSubmitNewBuild() {
+    // Mutation
+    MutateCreateNewBuild({
+      variables: {
+        input: NewBuildInput
+      }
+    })
+      .then(() => {
+        // Close Modal
+        props.setModalSubmitNewBuild(false);
+        // Update List on Screen
+        props.itemFetchControler.refetch();
+        // Open Notification
+        openNotificationWithIcon(
+          "success",
+          "Build Created",
+          "Everything works fine."
+        );
+      })
+      .catch(() => {
+        openNotificationWithIcon(
+          "error",
+          "Something Went Wrong",
+          "Try again later."
+        );
+      });
+  }
 
   if (itemList.loading) {
     return "Loading...";
@@ -143,13 +188,13 @@ export default function SetUserBuildComponent(props) {
   return (
     <SetBuildWrapper>
       <BuildForItem>
-        Setup your item <h3>rarity, rune and spirity</h3>
+        Build related to <h3>{props.selectedItem.name}</h3>
       </BuildForItem>
       <RarityGroup>
         <Radio.Group
-        // onChange={e => {
-        //   setNewBuildInput({ ...NewBuildInput, rarity: e.target.value });
-        // }}
+          onChange={e => {
+            setNewBuildInput({ ...NewBuildInput, rarity: e.target.value });
+          }}
         >
           <Radio.Button value="legendary">Legendary</Radio.Button>
           <Radio.Button value="epic">Epic</Radio.Button>
@@ -160,24 +205,24 @@ export default function SetUserBuildComponent(props) {
       </RarityGroup>
       <SelectedItensImages>
         <div>
-          {props.UserBuild.runeId && (
+          {NewBuildInput.perfectRuneId && (
             <img
-              src={`${
-                itemList.data.getAllItens.find(
-                  item => item.internalId === props.UserBuild.runeId
-                ).itemImage
-              }`}
+              src={
+                itemList.data.getAllItens.find(item => {
+                  return item.internalId == NewBuildInput.perfectRuneId;
+                }).itemImage
+              }
             />
           )}
         </div>
         <div>
-          {props.UserBuild.spirityRuneId && (
+          {NewBuildInput.perfectSpirityRuneId && (
             <img
-              src={`${
-                itemList.data.getAllItens.find(
-                  item => item.internalId === props.UserBuild.spirityRuneId
-                ).itemImage
-              }`}
+              src={
+                itemList.data.getAllItens.find(item => {
+                  return item.internalId == NewBuildInput.perfectSpirityRuneId;
+                }).itemImage
+              }
             />
           )}
         </div>
@@ -185,9 +230,10 @@ export default function SetUserBuildComponent(props) {
       <SelectInputs>
         <Select
           showSearch
-          defaultValue={props.UserBuild.runeId && props.UserBuild.runeId}
-          onChange={e => props.setUserBuild({ ...props.UserBuild, runeId: e })}
           placeholder="Your Item Rune"
+          onChange={e =>
+            setNewBuildInput({ ...NewBuildInput, perfectRuneId: e })
+          }
           optionFilterProp="children"
           filterOption={(input, option) =>
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
@@ -206,9 +252,8 @@ export default function SetUserBuildComponent(props) {
         </Select>
         <Select
           showSearch
-          defaultValue={props.UserBuild.spirityRuneId}
           onChange={e =>
-            props.setUserBuild({ ...props.UserBuild, spirityRuneId: e })
+            setNewBuildInput({ ...NewBuildInput, perfectSpirityRuneId: e })
           }
           placeholder="Your Spirity Rune"
           optionFilterProp="children"
@@ -228,6 +273,11 @@ export default function SetUserBuildComponent(props) {
             ))}
         </Select>
       </SelectInputs>
+      <span onClick={HandleSubmitNewBuild}>
+        <Button type="primary" size={"large"} block>
+          Create New Build
+        </Button>
+      </span>
     </SetBuildWrapper>
   );
 }

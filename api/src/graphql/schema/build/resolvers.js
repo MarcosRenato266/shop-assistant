@@ -26,7 +26,7 @@ const buildById = baseResolver.createResolver(async (root, { buildId }) => {
   return models.Build.findByPk(buildId);
 });
 
-const buildItemByInternalId = isAuthenticatedResolver.createResolver(
+const buildItemByInternalId = baseResolver.createResolver(
   async (root, { buildItemInternalId }) => {
     return await models.Build.findByPk(buildItemInternalId);
   }

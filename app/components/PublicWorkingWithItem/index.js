@@ -33,7 +33,7 @@ export default function index(props) {
       {itemList.loading || props.item === "" ? (
         <NoData>Please Select an Item on your left to continue</NoData>
       ) : (
-        <MainLayout selectedItem={itemList.data.itemById} />
+        <MainLayout selectedItem={itemList.data.itemById} itemFetchControler={itemList} />
       )}
     </WorkingWithItemArea>
   );

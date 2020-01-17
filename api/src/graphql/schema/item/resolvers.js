@@ -29,7 +29,7 @@ const itemById = baseResolver.createResolver(async (root, { itemId }) => {
   return models.Item.findByPk(itemId);
 });
 
-const itemByInternalId = isAuthenticatedResolver.createResolver(
+const itemByInternalId = baseResolver.createResolver(
   async (root, { itemInternalId }) => {
     return await models.Item.findByPk(itemInternalId);
   }

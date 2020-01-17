@@ -92,6 +92,7 @@ export default function MainLayout(props) {
         setSelectedBuild={setSelectedBuild}
         UserBuild={UserBuild}
         setUserBuild={setUserBuild}
+        itemFetchControler={props.itemFetchControler}
       />
       <ThisBuildPriceWorks>
         <Icon type="safety-certificate" theme="filled" />

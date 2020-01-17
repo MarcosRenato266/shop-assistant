@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Icon, Tooltip, Modal } from "antd";
 import BuildItemCard from "./BuildItemCard";
 import SetUserBuildComponent from "./SetUserBuildComponent";
+import SubmitNewBuild from "./SubmitNewBuild";
 
 const BuildsListArea = styled.div`
   display: flex;
@@ -61,6 +62,7 @@ const UserEditHerBuild = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const NoData = styled.div`
@@ -78,6 +80,7 @@ const NoData = styled.div`
 
 export default function BuildListMenu(props) {
   const [ModalMyBuild, setModalMyBuild] = useState(false);
+  const [ModalSubmitNewBuild, setModalSubmitNewBuild] = useState(false);
 
   function returnOrder(isPerfect, rarity) {
     switch (rarity) {
@@ -97,7 +100,7 @@ export default function BuildListMenu(props) {
   return (
     <BuildsListArea>
       <BuildListActions>
-        <span>
+        <span onClick={() => setModalSubmitNewBuild(true)}>
           Submit New Build
           <div className="NewBuild">
             <Icon type="plus" />
@@ -140,6 +143,19 @@ export default function BuildListMenu(props) {
           <Icon type="edit" />
         </UserEditHerBuild>
       </span>
+      <Modal
+        title="Submit New Build"
+        visible={ModalSubmitNewBuild}
+        onOk={() => setModalSubmitNewBuild(false)}
+        onCancel={() => setModalSubmitNewBuild(false)}
+        okText={"New Build"}
+      >
+        <SubmitNewBuild
+          selectedItem={props.selectedItem}
+          setModalSubmitNewBuild={setModalSubmitNewBuild}
+          itemFetchControler={props.itemFetchControler}
+        />
+      </Modal>
       <Modal
         title="Setup your item build and compare"
         visible={ModalMyBuild}
